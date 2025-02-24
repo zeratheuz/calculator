@@ -30,3 +30,17 @@ function operate(num1, operator, num2) {
       return divide(num1, num2)
   }
 }
+
+const display = document.querySelector(".display")
+const buttons = document.querySelectorAll('button')
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (display.textContent == 0) { display.textContent = '' }
+    if (display.textContent.length < 8
+      && button.className == 'number') {
+      display.textContent += button.textContent
+    }
+    if (button.textContent == 'AC') { display.textContent = 0 }
+  })
+})
