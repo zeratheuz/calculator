@@ -7,6 +7,7 @@ html {
   align-items: center;
   box-sizing: border-box;
   justify-content: center;
+  background-color: darkslateblue;
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -25,33 +26,34 @@ button {
 }
 
 button:hover {
-  background-color: aliceblue;
+  background-color: lightgoldenrodyellow;
 }
 
 .container {
   width: 60vmin;
   background-color: black;
-  border: 10px solid black;
+  border: 1.5vmin solid black;
   overflow: hidden;
 }
 
-.output {
+.display {
   height: 12vmin;
   text-align: end;
   font-weight: 600;
-  font-size: 10vmin;
+  font-size: 12vmin;
   align-content: end;
   background-color: white;
   background-color: gainsboro;
-  border-bottom: 10px solid black;
+  padding-right: 1vmin;
 }
 
 .buttons {
   display: flex;
   flex-wrap: wrap;
+  border-top: 1.5vmin solid black;
 }
 
-#num0 {
+.zero {
   flex-grow: 2;
 }
 
