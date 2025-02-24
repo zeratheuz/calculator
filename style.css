@@ -1,0 +1,64 @@
+html {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+  display: flex;
+  width: 15vmin;
+  height: 11vmin;
+  font-size: 7vmin;
+  font-weight: 600;
+  border-radius: 10%;
+  border-style: none;
+  justify-content: center;
+  align-items: center;
+  border: 0.4vmin solid black;
+  background-color: lightsalmon;
+}
+
+button:hover {
+  background-color: aliceblue;
+}
+
+.container {
+  width: 60vmin;
+  background-color: black;
+  border: 10px solid black;
+  overflow: hidden;
+}
+
+.output {
+  height: 12vmin;
+  text-align: end;
+  font-weight: 600;
+  font-size: 10vmin;
+  align-content: end;
+  background-color: white;
+  background-color: gainsboro;
+  border-bottom: 10px solid black;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#num0 {
+  flex-grow: 2;
+}
+
+.operators {
+  background-color: lightgreen;
+}
+
+.other {
+  background-color: lightskyblue;
+}
