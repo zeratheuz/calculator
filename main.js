@@ -33,14 +33,37 @@ function operate(num1, operator, num2) {
 
 const display = document.querySelector(".display")
 const buttons = document.querySelectorAll('button')
+const operators = ['+', '-', '*', '/']
+let currentOperator = ''
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     if (display.textContent == 0) { display.textContent = '' }
-    if (display.textContent.length < 8
-      && button.className == 'number') {
+
+    if (button.className.includes('number')
+      && display.textContent.length < 13) {
       display.textContent += button.textContent
     }
+
+    if (button.className.includes('operator')
+      && display.textContent.length < 13) {
+      let i = display.textContent.length - 1
+      currentOperator = button.textContent
+
+      if (display.textContent.includes('+')) {
+        display.textContent = display.textContent.replace(
+          ("+"), button.textContent)
+      } else if (display.textContent.includes('-')){
+        display.textContent = display.textContent.replace(("-"), button.textContent)
+      } else if (display.textContent.includes('*')){
+        display.textContent = display.textContent.replace(("*"), button.textContent)
+      } else if (display.textContent.includes('/')){
+        display.textContent = display.textContent.replace(("/"), button.textContent)
+      } else {
+        display.textContent += button.textContent
+      }
+    }
+
     if (button.textContent == 'AC') { display.textContent = 0 }
   })
 })
