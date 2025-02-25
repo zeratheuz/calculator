@@ -38,7 +38,12 @@ let currentOperator = ''
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
-    if (display.textContent == 0) { display.textContent = '' }
+
+    if (button.className.includes('dot')) {
+      display.textContent += '.'
+    }
+
+    if (display.textContent == '0') { display.textContent = '' }
 
     if (button.className.includes('number')
       && display.textContent.length < 13) {
@@ -46,22 +51,27 @@ buttons.forEach(button => {
     }
 
     if (button.className.includes('operator')
-      && display.textContent.length < 13) {
-      let i = display.textContent.length - 1
+      && display.textContent.length < 13
+      && display.textContent.length > 0) {
       currentOperator = button.textContent
 
       if (display.textContent.includes('+')) {
         display.textContent = display.textContent.replace(
           ("+"), button.textContent)
-      } else if (display.textContent.includes('-')){
+      } else if (display.textContent.includes('-')) {
         display.textContent = display.textContent.replace(("-"), button.textContent)
-      } else if (display.textContent.includes('*')){
+      } else if (display.textContent.includes('*')) {
         display.textContent = display.textContent.replace(("*"), button.textContent)
-      } else if (display.textContent.includes('/')){
+      } else if (display.textContent.includes('/')) {
         display.textContent = display.textContent.replace(("/"), button.textContent)
       } else {
         display.textContent += button.textContent
       }
+    }
+
+    if (button.className.includes('result')) {
+      let numbers = display.textContent.split(currentOperator)
+      display.textContent = operate(numbers[0], currentOperator, numbers[1])
     }
 
     if (button.textContent == 'AC') { display.textContent = 0 }
