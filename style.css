@@ -53,11 +53,11 @@ button:hover {
   border-top: 1.5vmin solid black;
 }
 
-.zero {
+.number {
   flex-grow: 2;
 }
 
-.operators {
+.operator {
   background-color: lightgreen;
 }
 
