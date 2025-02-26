@@ -7,16 +7,14 @@ function subtract(num1, num2) {
 }
 
 function multiply(num1, num2) {
+  if (num2 == '') {num2 = 1}
   return +num1 * +num2
 }
 
 function divide(num1, num2) {
+  if (num2 == '') {num2 = 1}
   return +num1 / +num2
 }
-
-let num1 = 0
-let num2 = 0
-let operator = ''
 
 function operate(num1, operator, num2) {
   switch (operator) {
@@ -43,7 +41,9 @@ buttons.forEach(button => {
       display.textContent += '.'
     }
 
-    if (display.textContent == '0') { display.textContent = '' }
+    if (display.textContent == 'bro stop' ||
+      display.textContent == 'NaN' ||
+      display.textContent == '0') { display.textContent = '' }
 
     if (button.className.includes('number')
       && display.textContent.length < 13) {
@@ -57,30 +57,48 @@ buttons.forEach(button => {
 
       if (display.textContent.includes('+')) {
         result(display, '+')
-        display.textContent += button.textContent
+        if (display.textContent !== 'NaN') {
+          display.textContent += button.textContent
+        }
+
       } else if (display.textContent.includes('-')) {
         result(display, '-')
-        display.textContent += button.textContent
+        if (display.textContent !== 'NaN') {
+          display.textContent += button.textContent
+        }
+
       } else if (display.textContent.includes('*')) {
         result(display, '*')
-        display.textContent += button.textContent
+        if (display.textContent !== 'NaN') {
+          display.textContent += button.textContent
+        }
+
       } else if (display.textContent.includes('/')) {
         result(display, '/')
-        display.textContent += button.textContent
+        if (display.textContent !== 'NaN') {
+          display.textContent += button.textContent
+        } 
+
       } else {
         display.textContent += button.textContent
       }
     }
 
-    if (button.className.includes('result')) {
+    if (button.className.includes('result') &&
+      display.textContent != 0) {
       result(display, currentOperator)
+      if (display.textContent == 'NaN') {
+        display.textContent = 'bro stop'
+      }
     }
 
-    if (button.textContent == 'AC') { display.textContent = 0 }
+    if (button.textContent == 'AC' ||
+      display.textContent == '') { display.textContent = 0 }
   })
 })
 
 function result(node, operator) {
-  let numbers = node.textContent.split(operator)
-  node.textContent = operate(numbers[0], operator, numbers[1])
+  const numbers = node.textContent.split(operator)
+  const result = operate(numbers[0], operator, numbers[1])
+  node.textContent = Number(Math.round(result + 'e2') + 'e-2')
 }
