@@ -56,24 +56,31 @@ buttons.forEach(button => {
       currentOperator = button.textContent
 
       if (display.textContent.includes('+')) {
-        display.textContent = display.textContent.replace(
-          ("+"), button.textContent)
+        result(display, '+')
+        display.textContent += button.textContent
       } else if (display.textContent.includes('-')) {
-        display.textContent = display.textContent.replace(("-"), button.textContent)
+        result(display, '-')
+        display.textContent += button.textContent
       } else if (display.textContent.includes('*')) {
-        display.textContent = display.textContent.replace(("*"), button.textContent)
+        result(display, '*')
+        display.textContent += button.textContent
       } else if (display.textContent.includes('/')) {
-        display.textContent = display.textContent.replace(("/"), button.textContent)
+        result(display, '/')
+        display.textContent += button.textContent
       } else {
         display.textContent += button.textContent
       }
     }
 
     if (button.className.includes('result')) {
-      let numbers = display.textContent.split(currentOperator)
-      display.textContent = operate(numbers[0], currentOperator, numbers[1])
+      result(display, currentOperator)
     }
 
     if (button.textContent == 'AC') { display.textContent = 0 }
   })
 })
+
+function result(node, operator) {
+  let numbers = node.textContent.split(operator)
+  node.textContent = operate(numbers[0], operator, numbers[1])
+}
