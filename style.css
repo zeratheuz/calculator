@@ -1,11 +1,7 @@
 html {
-  margin: 0;
-  padding: 0;
   height: 100vh;
   display: flex;
-  text-align: center;
   align-items: center;
-  box-sizing: border-box;
   justify-content: center;
   background-color: darkslateblue;
   font-family: 'Courier New', Courier, monospace;
@@ -42,7 +38,6 @@ button:hover {
   font-weight: 600;
   font-size: 7.5vmin;
   align-content: center;
-  background-color: white;
   background-color: gainsboro;
   padding-right: 1vmin;
 }
