@@ -7,32 +7,36 @@ function subtract(num1, num2) {
 }
 
 function multiply(num1, num2) {
-  if (num2 == '') {num2 = 1}
+  if (num2 == '') { num2 = 1 }
   return +num1 * +num2
 }
 
 function divide(num1, num2) {
-  if (num2 == '') {num2 = 1}
+  if (num2 == '') { num2 = 1 }
   return +num1 / +num2
 }
 
-function operate(num1, operator, num2) {
+function operate(num1, operator, num2 = 0) {
   switch (operator) {
     case '+':
       return add(num1, num2)
     case '-':
       return subtract(num1, num2)
     case '*':
+      num1 ?? 1
       return multiply(num1, num2)
     case '/':
+      num1 ?? 1
       return divide(num1, num2)
+    default:
+      return num1
   }
 }
 
 const display = document.querySelector(".display")
 const buttons = document.querySelectorAll('button')
-const operators = ['+', '-', '*', '/']
-let currentOperator = ''
+let currentOperator = '+'
+let currentResult = 0
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
@@ -44,6 +48,11 @@ buttons.forEach(button => {
     if (display.textContent == 'bro stop' ||
       display.textContent == 'NaN' ||
       display.textContent == '0') { display.textContent = '' }
+
+    if (button.className.includes('number') &&
+      display.textContent == currentResult) {
+      display.textContent = ''
+    }
 
     if (button.className.includes('number')
       && display.textContent.length < 13) {
@@ -77,7 +86,7 @@ buttons.forEach(button => {
         result(display, '/')
         if (display.textContent !== 'NaN') {
           display.textContent += button.textContent
-        } 
+        }
 
       } else {
         display.textContent += button.textContent
@@ -101,4 +110,5 @@ function result(node, operator) {
   const numbers = node.textContent.split(operator)
   const result = operate(numbers[0], operator, numbers[1])
   node.textContent = Number(Math.round(result + 'e2') + 'e-2')
+  currentResult = node.textContent
 }
