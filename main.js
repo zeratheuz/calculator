@@ -116,3 +116,76 @@ function result(node, operator) {
   node.textContent = Number(Math.round(result + 'e2') + 'e-2')
   currentResult = node.textContent
 }
+
+document.addEventListener('keydown', (e) => {
+
+  const numbers = '1234567890'
+  const operators = '+-*/%'
+
+  if (e.key == '.') {
+    display.textContent += '.'
+  }
+
+  if (display.textContent == 'bro stop' ||
+    display.textContent == 'NaN' ||
+    display.textContent == '0') { display.textContent = '' }
+
+  if (numbers.includes(e.key) &&
+    display.textContent == currentResult) {
+    display.textContent = ''
+  }
+
+  if (numbers.includes(e.key)
+    && display.textContent.length < 13) {
+    display.textContent += e.key
+  }
+
+  if (operators.includes(e.key)
+    && display.textContent.length < 13
+    && display.textContent.length > 0) {
+    currentOperator = e.key
+
+    if (display.textContent.includes('+')) {
+      result(display, '+')
+      if (display.textContent !== 'NaN') {
+        display.textContent += e.key
+      }
+
+    } else if (display.textContent.includes('-')) {
+      result(display, '-')
+      if (display.textContent !== 'NaN') {
+        display.textContent += e.key
+      }
+
+    } else if (display.textContent.includes('*')) {
+      result(display, '*')
+      if (display.textContent !== 'NaN') {
+        display.textContent += e.key
+      }
+
+    } else if (display.textContent.includes('/')) {
+      result(display, '/')
+      if (display.textContent !== 'NaN') {
+        display.textContent += e.key
+      }
+
+    } else {
+      display.textContent += e.key
+    }
+  }
+
+  if (e.key == 'Enter' &&
+    display.textContent != 0) {
+    result(display, currentOperator)
+    if (display.textContent == 'NaN') {
+      display.textContent = 'bro stop'
+    }
+  }
+
+  if (e.key == 'Backspace') {
+    display.textContent = display.textContent.slice(0, -1)
+  }
+
+  if (e.key == 'Escape' ||
+    display.textContent == '') { display.textContent = 0 }
+}) 
