@@ -54,13 +54,11 @@ buttons.forEach(button => {
       display.textContent = ''
     }
 
-    if (button.className.includes('number')
-      && display.textContent.length < 13) {
+    if (button.className.includes('number')) {
       display.textContent += button.textContent
     }
 
     if (button.className.includes('operator')
-      && display.textContent.length < 13
       && display.textContent.length > 0) {
       currentOperator = button.textContent
 
@@ -93,9 +91,12 @@ buttons.forEach(button => {
       }
     }
 
+    display.scrollLeft = display.scrollWidth
+
     if (button.className.includes('result') &&
       display.textContent != 0) {
       result(display, currentOperator)
+      display.scrollLeft = 0
       if (display.textContent == 'NaN') {
         display.textContent = 'bro stop'
       }
@@ -135,13 +136,9 @@ document.addEventListener('keydown', (e) => {
     display.textContent = ''
   }
 
-  if (numbers.includes(e.key)
-    && display.textContent.length < 13) {
-    display.textContent += e.key
-  }
+  if (numbers.includes(e.key)) { display.textContent += e.key }
 
   if (operators.includes(e.key)
-    && display.textContent.length < 13
     && display.textContent.length > 0) {
     currentOperator = e.key
 
@@ -174,9 +171,12 @@ document.addEventListener('keydown', (e) => {
     }
   }
 
+  display.scrollLeft = display.scrollWidth
+
   if (e.key == 'Enter' &&
     display.textContent != 0) {
     result(display, currentOperator)
+    display.scrollLeft = 0
     if (display.textContent == 'NaN') {
       display.textContent = 'bro stop'
     }
@@ -188,4 +188,4 @@ document.addEventListener('keydown', (e) => {
 
   if (e.key == 'Escape' ||
     display.textContent == '') { display.textContent = 0 }
-}) 
+})
