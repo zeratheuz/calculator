@@ -101,6 +101,10 @@ buttons.forEach(button => {
       }
     }
 
+    if (button.textContent == '⌫') {
+      display.textContent = display.textContent.slice(0, -1)
+    }
+
     if (button.textContent == 'AC' ||
       display.textContent == '') { display.textContent = 0 }
   })
